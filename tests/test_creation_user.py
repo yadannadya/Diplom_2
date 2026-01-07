@@ -18,7 +18,7 @@ class TestCreationUser:
       Methods.register_user(body=generate_user_and_delete[0])
       response = Methods.register_user(body=generate_user_and_delete[0])
       assert response.status_code == 403
-      assert  response.json()["success"] == False
+      assert  response.json()["message"] == "User already exists"
  
 
    @allure.title('Нельзя зарегистрировать пользователя с пустым полем в теле запроса')
@@ -26,4 +26,4 @@ class TestCreationUser:
    def test_create_user_with_invalid_data_unsuccess(self, user):
       response = Methods.register_user(body=user)
       assert response.status_code == 403
-      assert  response.json()["success"] == False
+      assert  response.json()["message"] == "Email, password and name are required fields"

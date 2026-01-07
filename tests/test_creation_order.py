@@ -16,7 +16,7 @@ class TestCreationOrder:
     def test_create_order_auth_user_without_ingredients_unsuccess(self, register_user_and_delete):
         response = Methods.create_order(body=Person.igridients_zero, token=register_user_and_delete[1])
         assert response.status_code == 400
-        assert response.json()["success"] == False
+        assert response.json()["message"] == "Ingredient ids must be provided"
 
     @allure.title('Ошибка 500 при создании заказа с неверным хешем ингридиентов с авторизацией')
     def test_create_order_auth_user_with_invalid_ingredients_unsuccess(self, register_user_and_delete):
@@ -33,7 +33,7 @@ class TestCreationOrder:
     def test_create_order_unauth_user_without_ingredients_unsuccess(self):
         response = Methods.create_order(body=Person.igridients_zero, token="")
         assert response.status_code == 400
-        assert response.json()["success"] == False
+        assert response.json()["message"] == "Ingredient ids must be provided"
 
     @allure.title('Ошибка 500 при создании заказа с неверным хешем ингридиентов без авторизации') 
     def test_create_order_unauth_user_with_invalid_ingredients_unsuccess(self):

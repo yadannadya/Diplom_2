@@ -18,5 +18,5 @@ class TestLoginuser:
    def test_login_user_invalid_body_unsuccess(self, user):
       response = Methods.login_user(user)
       assert response.status_code == 401
-      assert response.json()["success"] == False  
+      assert response.json()["message"] == "email or password are incorrect"  
 
